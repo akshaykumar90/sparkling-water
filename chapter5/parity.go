@@ -1,8 +1,8 @@
 package chapter5
 
-var precomputedParity = buildTable()
+var precomputedParity = buildParityTable()
 
-func buildTable() []uint8 {
+func buildParityTable() []uint8 {
 	table := make([]uint8, 1 << 16)
 
 	for i := 0; i < (1 << 16); i++ {
