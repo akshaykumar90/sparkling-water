@@ -3,6 +3,10 @@ package chapter8
 import "fmt"
 
 func BinaryTreeLevelOrder(root *BST) {
+	if root == nil {
+		return
+	}
+
 	q := []*BST{root}
 	cur, next := 1, 0
 	for cur > 0 {
