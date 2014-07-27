@@ -3,7 +3,7 @@
 package chapter11
 
 func BinarySearchAiEqI(a []int) int {
-	lo, hi := 0, len(a) - 1
+	lo, hi := 0, len(a)-1
 
 	for lo <= hi {
 		mid := (lo + hi) / 2
