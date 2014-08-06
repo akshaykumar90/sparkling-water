@@ -18,7 +18,7 @@ func TestTeamPhoto1(t *testing.T) {
 	for _, tt := range teamPhoto1Tests {
 		actual := TeamPhoto1(tt.a, tt.b)
 		if actual != tt.expected {
-			t.Errorf("TestTeamPhoto1(%v, %v): expected %t, actual %t",
+			t.Errorf("TeamPhoto1(%v, %v): expected %t, actual %t",
 				tt.a, tt.b, tt.expected, actual)
 		}
 	}
