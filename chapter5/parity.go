@@ -1,3 +1,5 @@
+// problem 5.1
+
 package chapter5
 
 var precomputedParity = buildParityTable()

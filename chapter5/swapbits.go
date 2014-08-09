@@ -1,3 +1,5 @@
+// problem 5.2
+
 package chapter5
 
 func SwapBits(n uint64, i uint, j uint) uint64 {
