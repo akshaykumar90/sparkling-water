@@ -1,3 +1,5 @@
+// problem 6.14
+
 package chapter6
 
 func SudokuChecker(arr [][]int) bool {

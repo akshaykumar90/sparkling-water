@@ -1,3 +1,5 @@
+// problem 6.22
+
 package chapter6
 
 import "fmt"

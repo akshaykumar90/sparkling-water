@@ -1,3 +1,5 @@
+// problem 6.1
+
 package chapter6
 
 func DutchNationalFlag(arr []int, p int) {
