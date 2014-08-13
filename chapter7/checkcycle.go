@@ -1,3 +1,5 @@
+// problem 7.2
+
 package chapter7
 
 func CheckCycle(head *Element) *Element {
