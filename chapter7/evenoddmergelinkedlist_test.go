@@ -2,18 +2,18 @@ package chapter7
 
 import "testing"
 
-func assertEqualLists(t *testing.T, expected, actual *Element) {
+func assertEqualLists(t *testing.T, name string, expected, actual *Element) {
 	l := 0
 	for ; actual != nil && expected != nil; l++ {
 		if actual.Value != expected.Value {
-			t.Errorf("EvenOddMergeLinkedList: mismatch, expected %d actual %d", expected.Value, actual.Value)
+			t.Errorf("%s: mismatch, expected %d actual %d", name, expected.Value, actual.Value)
 		}
 		actual = actual.Next
 		expected = expected.Next
 	}
 
 	if actual != nil || expected != nil {
-		t.Errorf("EvenOddMergeLinkedList: premature termination, matching prefix length %d", l)
+		t.Errorf("%s: premature termination, matching prefix length %d",name, l)
 	}
 }
 
@@ -24,28 +24,28 @@ func TestEvenOddMergeLinkedList(t *testing.T) {
 
 	actual := EvenOddMergeLinkedList(&list)
 
-	assertEqualLists(t, expected, actual)
+	assertEqualLists(t, "EvenOddMergeLinkedList", expected, actual)
 }
 
 func TestEvenOddMergeLinkedListNil(t *testing.T) {
-	assertEqualLists(t, nil, EvenOddMergeLinkedList(nil))
+	assertEqualLists(t, "EvenOddMergeLinkedList", nil, EvenOddMergeLinkedList(nil))
 }
 
 func TestEvenOddMergeLinkedListSingleElement(t *testing.T) {
-	assertEqualLists(t, &Element{1, nil}, EvenOddMergeLinkedList(&Element{1, nil}))
+	assertEqualLists(t, "EvenOddMergeLinkedList", &Element{1, nil}, EvenOddMergeLinkedList(&Element{1, nil}))
 }
 
 func TestEvenOddMergeLinkedListTwoElements(t *testing.T) {
-	assertEqualLists(t, &Element{1, &Element{2, nil}},
+	assertEqualLists(t, "EvenOddMergeLinkedList", &Element{1, &Element{2, nil}},
 		EvenOddMergeLinkedList(&Element{1, &Element{2, nil}}))
 }
 
 func TestEvenOddMergeLinkedListThreeElements(t *testing.T) {
-	assertEqualLists(t, &Element{1, &Element{3, &Element{2, nil}}},
+	assertEqualLists(t, "EvenOddMergeLinkedList", &Element{1, &Element{3, &Element{2, nil}}},
 		EvenOddMergeLinkedList(&Element{1, &Element{2, &Element{3, nil}}}))
 }
 
 func TestEvenOddMergeLinkedListFourElement(t *testing.T) {
-	assertEqualLists(t, &Element{1, &Element{3, &Element{2, &Element{4, nil}}}},
+	assertEqualLists(t, "EvenOddMergeLinkedList", &Element{1, &Element{3, &Element{2, &Element{4, nil}}}},
 		EvenOddMergeLinkedList(&Element{1, &Element{2, &Element{3, &Element{4, nil}}}}))
 }
