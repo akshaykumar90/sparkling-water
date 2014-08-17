@@ -6,6 +6,7 @@ import (
 )
 
 func TestTowerHanoi(t *testing.T) {
+	fmt.Println("TestTowerHanoi:")
 	TowerHanoi(3)
 	fmt.Println()
 }

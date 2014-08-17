@@ -17,6 +17,7 @@ func TestBSTSortedOrder(t *testing.T) {
 		},
 	}
 
+	fmt.Println("TestBSTSortedOrder:")
 	BSTSortedOrder(&tree)
 	fmt.Println()
 }

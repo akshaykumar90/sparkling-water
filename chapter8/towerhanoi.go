@@ -7,8 +7,7 @@ import "fmt"
 func _hanoi(n int, from, to, aux string) {
 	if n > 0 {
 		_hanoi(n-1, from, aux, to)
-		fmt.Printf("Ring %d : %s => %s", n, from, to)
-		fmt.Println()
+		fmt.Printf("Ring %d : %s => %s\n", n, from, to)
 		_hanoi(n-1, aux, to, from)
 	}
 }

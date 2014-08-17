@@ -17,11 +17,13 @@ func TestBinaryTreeLevelOrder(t *testing.T) {
 		},
 	}
 
+	fmt.Println("TestBinaryTreeLevelOrder:")
 	BinaryTreeLevelOrder(&tree)
 	fmt.Println()
 }
 
 func TestEmptyBinaryTreeLevelOrder(t *testing.T) {
+	fmt.Println("TestEmptyBinaryTreeLevelOrder:")
 	BinaryTreeLevelOrder(nil)
 	fmt.Println()
 }
