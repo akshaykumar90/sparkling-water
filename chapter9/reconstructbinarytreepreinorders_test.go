@@ -5,18 +5,17 @@ import (
 	"testing"
 )
 
-func TestReconstructBinaryTreePreInOrders(t *testing.T) {
-	var inOrderTraversal func(root *TreeNode)
-	inOrderTraversal = func(root *TreeNode) {
-		if root == nil {
-			return
-		} else {
-			inOrderTraversal(root.Left)
-			fmt.Println(root.Value)
-			inOrderTraversal(root.Right)
-		}
+func inOrderTraversal(root *TreeNode) {
+	if root == nil {
+		return
+	} else {
+		inOrderTraversal(root.Left)
+		fmt.Println(root.Value)
+		inOrderTraversal(root.Right)
 	}
+}
 
+func TestReconstructBinaryTreePreInOrders(t *testing.T) {
 	in := []string{"F", "B", "A", "E", "H", "C", "D", "I", "G"}
 	pre := []string{"H", "B", "F", "E", "A", "C", "D", "G", "I"}
 
