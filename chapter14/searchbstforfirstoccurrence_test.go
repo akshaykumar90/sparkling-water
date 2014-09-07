@@ -21,6 +21,7 @@ var searchBSTForFirstOccurrenceTests = []struct {
 	{108, b},
 	{285, g},
 	{143, nil},
+	{2, e},
 }
 
 func TestSearchBSTForFirstOccurrenceRecursive(t *testing.T) {
