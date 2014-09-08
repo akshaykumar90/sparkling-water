@@ -2,6 +2,7 @@ package chapter14
 
 import "testing"
 
+// Figure 14.1 - An example BST.
 var tree TreeNode = TreeNode{19,
 	&TreeNode{7,
 		&TreeNode{3,
@@ -27,7 +28,10 @@ var tree TreeNode = TreeNode{19,
 				&TreeNode{Value: 41},
 			},
 		},
-		&TreeNode{Value: 47},
+		&TreeNode{47,
+			nil,
+			&TreeNode{Value: 53},
+		},
 	},
 }
 
@@ -44,7 +48,7 @@ var validSearchBSTFirstLargerKTests = []struct {
 	{17, 19},
 }
 
-var invalidSearchBSTFirstLargerKTests = []int{12, 25, 20, 47}
+var invalidSearchBSTFirstLargerKTests = []int{12, 25, 20, 53}
 
 func TestSearchBSTFirstLargerKValid(t *testing.T) {
 	for _, tt := range validSearchBSTFirstLargerKTests {
