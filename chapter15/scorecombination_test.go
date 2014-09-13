@@ -8,6 +8,8 @@ var scoreCombinationTests = []struct {
 	expected int
 }{
 	{[]int{2, 3, 7}, 12, 4},
+	{[]int{1, 2, 3}, 4, 4},
+	{[]int{2, 3, 5, 6}, 10, 5},
 }
 
 func TestScoreCombination(t *testing.T) {
