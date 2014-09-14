@@ -5,7 +5,7 @@ import "testing"
 func TestWiringCircuitBoard(t *testing.T) {
 	// Figure 16.6 - A set of pins and wires between them.
 	board := [][]int{
-		{1, 10, 9},
+		{1, 9},
 		{2, 10, 0},
 		{3, 11, 1},
 		{4, 12, 2},
