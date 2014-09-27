@@ -1,4 +1,5 @@
-//problem 10.8
+// Problem 10.8
+
 package chapter10
 
 import (
@@ -6,48 +7,40 @@ import (
 	"fmt"
 )
 
-func OnlineMedian(s []int) {
+func OnlineMedianHelper(a []int) (IntHeap, IntHeap, []float64) {
 	minHeap, maxHeap := make(IntHeap, 0), make(IntHeap, 0)
 
-	seen := make([]int, 0)
+	medians := []float64{float64(a[0])}
 
-	median := float64(s[0])
-
-	maxHeap = append(maxHeap, -s[0])
+	maxHeap = append(maxHeap, -a[0])
 
 	heap.Init(&maxHeap)
 	heap.Init(&minHeap)
 
-	seen = append(seen, s[0])
-	fmt.Println(seen)
-	fmt.Println(median)
-
-	for _, v := range s[1:] {
-		if v < -maxHeap[0] {
-			heap.Push(&maxHeap, -v)
+	for i := 1; i < len(a); i++ {
+		if a[i] <= -maxHeap[0] {
+			heap.Push(&maxHeap, -a[i])
+			if i&1 != 0 {
+				heap.Push(&minHeap, -heap.Pop(&maxHeap).(int))
+			}
 		} else {
-			heap.Push(&minHeap, v)
+			heap.Push(&minHeap, a[i])
+			if i&1 == 0 {
+				heap.Push(&maxHeap, -heap.Pop(&minHeap).(int))
+			}
 		}
 
-		switch len(minHeap) - len(maxHeap) {
-		case -2:
-			heap.Push(&minHeap, -heap.Pop(&maxHeap).(int))
-			median = float64(minHeap[0]-maxHeap[0]) / 2.0
-		case +2:
-			heap.Push(&maxHeap, -heap.Pop(&minHeap).(int))
-			median = float64(minHeap[0]-maxHeap[0]) / 2.0
-		case -1:
-			median = float64(-maxHeap[0])
-		case +1:
-			median = float64(minHeap[0])
-		case 0:
-			median = float64(minHeap[0]-maxHeap[0]) / 2.0
+		if (i+1)&1 == 0 {
+			medians = append(medians, float64(minHeap[0]-maxHeap[0])/2.0)
+		} else {
+			medians = append(medians, float64(-maxHeap[0]))
 		}
-
-		seen = append(seen, v)
-		fmt.Println(seen)
-		fmt.Println(median)
-
 	}
 
+	return maxHeap, minHeap, medians
+}
+
+func OnlineMedian(s []int) {
+	_, _, medians := OnlineMedianHelper(s)
+	fmt.Println(medians)
 }
