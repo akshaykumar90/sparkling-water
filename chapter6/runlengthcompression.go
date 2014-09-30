@@ -30,20 +30,17 @@ func Encoding(s string) string {
 }
 
 func Decoding(s string) string {
-	runes := []rune(s)
-
 	var out string
 
 	cnt := 0
 
-	for i := 0; i < len(runes); i++ {
-		if unicode.IsDigit(runes[i]) {
-			cnt = cnt*10 + int(runes[i]-'0')
+	for _, r := range s {
+		if unicode.IsDigit(r) {
+			cnt = cnt*10 + int(r-'0')
 		} else {
-			out += strings.Repeat(string(runes[i]), cnt)
+			out += strings.Repeat(string(r), cnt)
 			cnt = 0
 		}
-
 	}
 
 	return out
