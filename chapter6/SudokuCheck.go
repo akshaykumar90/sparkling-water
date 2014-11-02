@@ -35,4 +35,3 @@ func SudokuChecker(arr [][]int) bool {
 	}
 	return true
 }
-
