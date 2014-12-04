@@ -53,7 +53,7 @@ func TestPrettyPrinting2(t *testing.T) {
 	for k := len(words); k > 0; k = b[k] {
 		lines = append(lines, strings.Join(words[b[k]:k], " "))
 	}
-	
+
 	for i := len(lines) - 1; i >= 0; i-- {
 		line := lines[i]
 		fmt.Printf("%-*s%d\n", width, line, width-utf8.RuneCountInString(line))
