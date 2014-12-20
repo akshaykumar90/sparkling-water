@@ -1,7 +1,9 @@
 package chapter13
 
-import "testing"
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestUnionIntervals(t *testing.T) {
 	// Figure 13.3 - A set of intervals and their union.
@@ -17,7 +19,8 @@ func TestUnionIntervals(t *testing.T) {
 		{Endpoint{12, true}, Endpoint{14, true}},
 		{Endpoint{12, false}, Endpoint{15, true}},
 		{Endpoint{13, false}, Endpoint{13, false}},
-		{Endpoint{16, false}, Endpoint{17, false}},
+		{Endpoint{15, false}, Endpoint{17, false}},
 	}
-	fmt.Println(UnionIntervals(intervals))
+
+	fmt.Println("TestUnionIntervals:", UnionIntervals(intervals))
 }
