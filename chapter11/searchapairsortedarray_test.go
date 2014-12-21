@@ -18,7 +18,7 @@ func TestSearchAPairSortedArray(t *testing.T) {
 
 	for _, tt := range searchAPairSortedArrayTests {
 		x, y := SearchAPairSortedArray(arr, tt.k)
-		if x != tt.i && y != tt.j {
+		if x != tt.i || y != tt.j {
 			t.Errorf("SearchAPairSortedArray(%v, %d): expected (%d,%d), actual (%d,%d)",
 				arr, tt.k, tt.i, tt.j, x, y)
 		}
