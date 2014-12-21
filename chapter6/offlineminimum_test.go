@@ -8,6 +8,8 @@ import (
 )
 
 func TestOfflineMinimum(t *testing.T) {
+	t.Skip("Skipping TestOfflineMinimum.")
+
 	rand.Seed(time.Now().UTC().UnixNano())
 
 	size_A, size_E := 100, 10
