@@ -1,33 +1,33 @@
-// problem 5.6
+// Problem 5.6
 
 package chapter5
 
-import "errors"
+import (
+	"errors"
+	"unicode"
+	"unicode/utf8"
+)
+
+var ErrInvalidString = errors.New("StringToInt: invalid string")
 
 func StringToInt(s string) (int, error) {
-	if len(s) == 0 {
-		return 0, errors.New("StringToInt: invalid string")
+	if len(s) == 0 || s == "-" {
+		return 0, ErrInvalidString
 	}
 
 	mult, num := 1, 0
 
-	for i, ch := range s {
-		switch {
-		case ch == '-':
-			if i == 0 {
-				mult = -1
-			} else {
-				return 0, errors.New("StringToInt: invalid string")
-			}
-		case ch > '9' || ch < '0':
-			return 0, errors.New("StringToInt: invalid string")
-		default:
-			num = num*10 + int(ch-'0')
-		}
+	fst, size := utf8.DecodeRuneInString(s)
+	if fst == '-' {
+		mult = -1
+		s = s[size:]
 	}
 
-	if mult == -1 && len(s) == 1 {
-		return 0, errors.New("StringToInt: invalid string")
+	for _, ch := range s {
+		if !unicode.IsDigit(ch) {
+			return 0, ErrInvalidString
+		}
+		num = num*10 + int(ch-'0')
 	}
 
 	return mult * num, nil

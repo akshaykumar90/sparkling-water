@@ -12,6 +12,7 @@ var validStringToIntTests = []struct {
 	{"-8", -8},
 	{"03213", 3213},
 	{"-00033", -33},
+	{"-0", 0},
 }
 
 var invalidStringToIntTests = []string{
