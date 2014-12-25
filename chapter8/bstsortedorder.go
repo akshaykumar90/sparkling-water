@@ -2,10 +2,7 @@
 
 package chapter8
 
-import (
-	"errors"
-	"fmt"
-)
+import "errors"
 
 type BST struct {
 	Value int
@@ -29,18 +26,22 @@ func (st *Stack) Pop() (*BST, error) {
 	}
 }
 
-func BSTSortedOrder(root *BST) {
-	var path Stack
+func BSTSortedOrder(root *BST) []int {
+	result := make([]int, 0)
+
+	path := make(Stack, 0)
 
 	for root != nil || len(path) > 0 {
 		switch root {
 		case nil:
 			parent, _ := path.Pop()
-			fmt.Println(parent.Value)
+			result = append(result, parent.Value)
 			root = parent.Right
 		default:
 			path.Push(root)
 			root = root.Left
 		}
 	}
+
+	return result
 }
