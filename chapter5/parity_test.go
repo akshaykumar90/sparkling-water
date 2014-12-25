@@ -4,7 +4,7 @@ import "testing"
 
 var parityTests = []struct {
 	n        uint64 // input
-	expected uint8 // expected result
+	expected uint8  // expected result
 }{
 	{0, 0},
 	{1, 1},

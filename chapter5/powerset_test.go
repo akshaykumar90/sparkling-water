@@ -1,13 +1,19 @@
 package chapter5
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestPowerSet(t *testing.T) {
-	t.Skip("Skipping PowerSet tests...")
-
-	var powerSetTests = [][]int{{}, {1}, {1, 2, 3}}
+	var powerSetTests = [][]int{
+		{},
+		{1},
+		{1, 2, 3},
+	}
 
 	for _, tt := range powerSetTests {
+		fmt.Printf("PowerSet(%v):\n", tt)
 		PowerSet(tt)
 	}
 }
