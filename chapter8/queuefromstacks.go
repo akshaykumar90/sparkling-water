@@ -1,4 +1,4 @@
-// problem 8.12
+// Problem 8.12
 
 package chapter8
 
@@ -21,18 +21,18 @@ func (st *IntStack) Pop() (int, error) {
 }
 
 type StackedQueue struct {
-	head, tail *IntStack
+	head, tail IntStack
 }
 
-func (sq StackedQueue) Enqueue(n int) {
+func (sq *StackedQueue) Enqueue(n int) {
 	sq.head.Push(n)
 }
 
-func (sq StackedQueue) Dequeue() (int, error) {
-	if len(*sq.tail) > 0 {
+func (sq *StackedQueue) Dequeue() (int, error) {
+	if len((*sq).tail) > 0 {
 		return sq.tail.Pop()
-	} else if len(*sq.head) > 0 {
-		for len(*sq.head) > 0 {
+	} else if len((*sq).head) > 0 {
+		for len((*sq).head) > 0 {
 			n, _ := sq.head.Pop()
 			sq.tail.Push(n)
 		}
@@ -45,5 +45,5 @@ func (sq StackedQueue) Dequeue() (int, error) {
 func NewStackedQueue() *StackedQueue {
 	head := make(IntStack, 0)
 	tail := make(IntStack, 0)
-	return &StackedQueue{&head, &tail}
+	return &StackedQueue{head, tail}
 }
