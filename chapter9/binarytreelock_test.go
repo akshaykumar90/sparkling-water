@@ -19,34 +19,34 @@ func TestBinaryTreeLock(t *testing.T) {
 
 	// ---
 
-	if elems[0].isLock() {
-		t.Fatalf("isLock: %t, want %t", true, false)
+	if elems[0].IsLock() {
+		t.Fatalf("IsLock: %t, want %t", true, false)
 	}
 
 	// ---
 
-	elems[0].lock()
+	elems[0].Lock()
 
-	if !elems[0].isLock() {
-		t.Fatalf("isLock: %t, want %t", false, true)
+	if !elems[0].IsLock() {
+		t.Fatalf("IsLock: %t, want %t", false, true)
 	}
 
-	elems[0].unlock()
+	elems[0].Unlock()
 
 	// ---
 
-	elems[1].lock()
-	elems[0].lock()
+	elems[1].Lock()
+	elems[0].Lock()
 
-	if elems[0].isLock() {
-		t.Fatalf("isLock: %t, want %t", true, false)
+	if elems[0].IsLock() {
+		t.Fatalf("IsLock: %t, want %t", true, false)
 	}
 
 	// ---
 
-	elems[2].lock()
+	elems[2].Lock()
 
-	if !elems[2].isLock() {
-		t.Fatalf("isLock: %t, want %t", false, true)
+	if !elems[2].IsLock() {
+		t.Fatalf("IsLock: %t, want %t", false, true)
 	}
 }
