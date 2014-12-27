@@ -1,4 +1,4 @@
-// problem 9.9
+// Problem 9.9
 
 package chapter9
 
@@ -18,4 +18,21 @@ func consumePreorder(vs []string, st int) (*TreeNode, int) {
 func ReconstructPreorderWithNull(vs []string) *TreeNode {
 	root, _ := consumePreorder(vs, 0)
 	return root
+}
+
+func ReconstructPreorderWithNull2(vs []string) *TreeNode {
+	stack := make([]*TreeNode, 0)
+
+	for i := len(vs) - 1; i >= 0; i-- {
+		if vs[i] != "null" {
+			sp := len(stack)
+			node := TreeNode{vs[i], stack[sp-1], stack[sp-2]}
+			stack = stack[:sp-2]
+			stack = append(stack, &node)
+		} else {
+			stack = append(stack, nil)
+		}
+	}
+
+	return stack[len(stack)-1]
 }
