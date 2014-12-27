@@ -1,9 +1,6 @@
 package chapter9
 
-import (
-	"fmt"
-	"testing"
-)
+import "testing"
 
 func TestInorderTraversalWithParent(t *testing.T) {
 	n19 := TreeNodeWithParent{Value: 19}
@@ -25,6 +22,17 @@ func TestInorderTraversalWithParent(t *testing.T) {
 	n7.Parent = &n19
 	n43.Parent = &n19
 
-	InorderTraversalWithParent(&n19)
-	fmt.Println()
+	expected := []int{3, 7, 11, 19, 23, 43}
+
+	actual := InorderTraversalWithParent(&n19)
+
+	if len(expected) != len(actual) {
+		t.Fatalf("InorderTraversalWithParent: expected length %d, actual length %d", len(expected), len(actual))
+	}
+
+	for i, v := range expected {
+		if v != actual[i] {
+			t.Fatalf("InorderTraversalWithParent: at %d: expected %d, actual %d", i, v, actual[i])
+		}
+	}
 }
