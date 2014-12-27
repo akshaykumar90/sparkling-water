@@ -1,22 +1,23 @@
-// problem 8.9
+// Problem 8.9
 
 package chapter8
 
-import "fmt"
-
-func BinaryTreeLevelOrder(root *BST) {
+func BinaryTreeLevelOrder(root *BST) [][]int {
 	if root == nil {
-		return
+		return [][]int{}
 	}
+
+	result := make([][]int, 0)
 
 	q := []*BST{root}
 	cur, next := 1, 0
 	for cur > 0 {
+		level := make([]int, 0, cur)
 		for ; cur > 0; cur-- {
 			x := q[0]
 			q = q[1:]
-			fmt.Print(x.Value)
-			fmt.Print(" ")
+
+			level = append(level, x.Value)
 
 			if x.Left != nil {
 				q = append(q, x.Left)
@@ -28,6 +29,8 @@ func BinaryTreeLevelOrder(root *BST) {
 			}
 		}
 		cur, next = next, 0
-		fmt.Println()
+		result = append(result, level)
 	}
+
+	return result
 }
