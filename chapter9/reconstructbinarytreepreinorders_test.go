@@ -29,7 +29,7 @@ func assertEqualBinaryTrees(expected, actual *TreeNode) bool {
 	} else if expected != nil && actual != nil {
 		return expected.Value == actual.Value &&
 			assertEqualBinaryTrees(expected.Left, actual.Left) &&
-			assertEqualBinaryTrees(expected.Right, actual.Left)
+			assertEqualBinaryTrees(expected.Right, actual.Right)
 	} else {
 		return false
 	}
@@ -41,5 +41,7 @@ func TestReconstructBinaryTreePreInOrders(t *testing.T) {
 
 	actual := ReconstructBinaryTreePreInOrders(pre, in)
 
-	assertEqualBinaryTrees(ReconstructThisBinaryTree, actual)
+	if !assertEqualBinaryTrees(ReconstructThisBinaryTree, actual) {
+		t.Fatalf("ReconstructBinaryTreePreInOrders: assertEqualBinaryTrees failed!")
+	}
 }
