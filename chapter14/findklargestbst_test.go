@@ -10,7 +10,7 @@ func TestFindKLargestBST(t *testing.T) {
 	sz := len(expected)
 
 	for k := 1; k <= sz; k++ {
-		actual := FindKLargestBST(&tree, k)
+		actual := FindKLargestBST(tree, k)
 		if k != len(actual) {
 			t.Fatalf("FindKLargestBST(%v, %d): expected length %d, actual length %d",
 				tree, k, k, len(actual))

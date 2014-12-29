@@ -3,7 +3,7 @@ package chapter14
 import "testing"
 
 // Figure 14.1 - An example BST.
-var tree TreeNode = TreeNode{19,
+var tree = &TreeNode{19,
 	&TreeNode{7,
 		&TreeNode{3,
 			&TreeNode{Value: 2},
@@ -52,7 +52,7 @@ var invalidSearchBSTFirstLargerKTests = []int{12, 25, 20, 53}
 
 func TestSearchBSTFirstLargerKValid(t *testing.T) {
 	for _, tt := range validSearchBSTFirstLargerKTests {
-		actual := SearchBSTFirstLargerK(&tree, tt.k)
+		actual := SearchBSTFirstLargerK(tree, tt.k)
 		if actual == nil {
 			t.Errorf("SearchBSTFirstLargerK(%d): expected %d, actual nil",
 				tt.k, tt.expected)
@@ -65,7 +65,7 @@ func TestSearchBSTFirstLargerKValid(t *testing.T) {
 
 func TestSearchBSTFirstLargerKInvalid(t *testing.T) {
 	for _, tt := range invalidSearchBSTFirstLargerKTests {
-		actual := SearchBSTFirstLargerK(&tree, tt)
+		actual := SearchBSTFirstLargerK(tree, tt)
 		if actual != nil {
 			t.Errorf("SearchBSTFirstLargerK(%d): expected nil, actual %v",
 				tt, actual)

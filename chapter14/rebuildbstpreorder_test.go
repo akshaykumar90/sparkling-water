@@ -17,7 +17,7 @@ func assertEqualBinaryTrees(expected, actual *TreeNode) bool {
 func TestRebuildBSTPreorder(t *testing.T) {
 	actual := RebuildBSTPreorder([]int{19, 7, 3, 2, 5, 11, 17, 13, 43, 23, 37, 29, 31, 41, 47, 53})
 
-	if !assertEqualBinaryTrees(&tree, actual) {
+	if !assertEqualBinaryTrees(tree, actual) {
 		t.Fatalf("RebuildBSTPreorder: assertEqualBinaryTrees failed!")
 	}
 }
@@ -25,7 +25,7 @@ func TestRebuildBSTPreorder(t *testing.T) {
 func TestRebuildBSTPreorderBetter(t *testing.T) {
 	actual := RebuildBSTPreorderBetter([]int{19, 7, 3, 2, 5, 11, 17, 13, 43, 23, 37, 29, 31, 41, 47, 53})
 
-	if !assertEqualBinaryTrees(&tree, actual) {
+	if !assertEqualBinaryTrees(tree, actual) {
 		t.Fatalf("RebuildBSTPreorderBetter: assertEqualBinaryTrees failed!")
 	}
 }

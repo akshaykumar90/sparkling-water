@@ -17,7 +17,7 @@ var BSTLowestCommonAncestorTests = []struct {
 
 func TestBSTLowestCommonAncestor(t *testing.T) {
 	for _, tt := range BSTLowestCommonAncestorTests {
-		actual := BSTLowestCommonAncestor(&tree, tt.s, tt.b)
+		actual := BSTLowestCommonAncestor(tree, tt.s, tt.b)
 		if actual != tt.expected {
 			t.Errorf("BSTLowestCommonAncestor(%d, %d): expected %d, actual %d",
 				tt.s, tt.b, tt.expected, actual)
