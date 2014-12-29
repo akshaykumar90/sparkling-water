@@ -1,25 +1,33 @@
 package chapter14
 
-import (
-	"fmt"
-	"strings"
-	"testing"
-)
+import "testing"
 
-func preOrderPrettyPrint(node *TreeNode, depth int) {
+func treeHeight(node *TreeNode) int {
 	if node == nil {
-		fmt.Printf("%s%s\n", strings.Repeat(">", depth), "nil")
+		return 0
 	} else {
-		fmt.Printf("%s%d\n", strings.Repeat(">", depth), node.Value)
-		preOrderPrettyPrint(node.Left, depth+1)
-		preOrderPrettyPrint(node.Right, depth+1)
+		left := treeHeight(node.Left)
+		right := treeHeight(node.Right)
+
+		max := 0
+		if left < right {
+			max = right
+		} else {
+			max = left
+		}
+
+		return max + 1
 	}
 }
 
 func TestBuildBSTFromSortedArray(t *testing.T) {
 	root := BuildBSTFromSortedArray([]int{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53})
 
-	fmt.Println("TestBuildBSTFromSortedArray:")
-	preOrderPrettyPrint(root, 0)
-	fmt.Println()
+	if !IsBinaryTreeABST(root) {
+		t.Fatalf("BuildBSTFromSortedArray: Not a BST!")
+	}
+
+	if actual, expected := treeHeight(root), 5; actual > expected {
+		t.Fatalf("BuildBSTFromSortedArray: expected height %d, actual height %d", expected, actual)
+	}
 }

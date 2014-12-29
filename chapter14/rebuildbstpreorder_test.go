@@ -1,32 +1,31 @@
 package chapter14
 
-import (
-	"fmt"
-	"testing"
-)
+import "testing"
 
-func inOrderTraversal(root *TreeNode) {
-	if root == nil {
-		return
+func assertEqualBinaryTrees(expected, actual *TreeNode) bool {
+	if expected == nil && actual == nil {
+		return true
+	} else if expected != nil && actual != nil {
+		return expected.Value == actual.Value &&
+			assertEqualBinaryTrees(expected.Left, actual.Left) &&
+			assertEqualBinaryTrees(expected.Right, actual.Right)
 	} else {
-		inOrderTraversal(root.Left)
-		fmt.Println(root.Value)
-		inOrderTraversal(root.Right)
+		return false
 	}
 }
 
 func TestRebuildBSTPreorder(t *testing.T) {
-	root := RebuildBSTPreorder([]int{19, 7, 3, 2, 5, 11, 17, 13, 43, 23, 37, 29, 31, 41, 47})
+	actual := RebuildBSTPreorder([]int{19, 7, 3, 2, 5, 11, 17, 13, 43, 23, 37, 29, 31, 41, 47, 53})
 
-	fmt.Println("TestRebuildBSTPreorder:")
-	inOrderTraversal(root)
-	fmt.Println()
+	if !assertEqualBinaryTrees(&tree, actual) {
+		t.Fatalf("RebuildBSTPreorder: assertEqualBinaryTrees failed!")
+	}
 }
 
 func TestRebuildBSTPreorderBetter(t *testing.T) {
-	root := RebuildBSTPreorderBetter([]int{19, 7, 3, 2, 5, 11, 17, 13, 43, 23, 37, 29, 31, 41, 47})
+	actual := RebuildBSTPreorderBetter([]int{19, 7, 3, 2, 5, 11, 17, 13, 43, 23, 37, 29, 31, 41, 47, 53})
 
-	fmt.Println("TestRebuildBSTPreorderBetter:")
-	inOrderTraversal(root)
-	fmt.Println()
+	if !assertEqualBinaryTrees(&tree, actual) {
+		t.Fatalf("RebuildBSTPreorderBetter: assertEqualBinaryTrees failed!")
+	}
 }
