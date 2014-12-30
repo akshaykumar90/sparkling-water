@@ -3,6 +3,7 @@ package chapter14
 import "testing"
 
 func TestViewFromAbove(t *testing.T) {
+	// Figure 14.7: Instance of the view from above problem, with patterns used to denote colors.
 	seq := []LineSegment{
 		{0, 4, 1, 1},
 		{5, 7, 2, 1},
