@@ -1,4 +1,4 @@
-// problem 12.7
+// Problem 12.7
 
 package chapter12
 
@@ -26,7 +26,9 @@ func Anagrams(words []string) [][]string {
 	}
 
 	for _, v := range hash {
-		res = append(res, v)
+		if len(v) >= 2 {
+			res = append(res, v)
+		}
 	}
 
 	return res
