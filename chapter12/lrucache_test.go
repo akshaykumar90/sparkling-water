@@ -31,10 +31,23 @@ func TestLRUCache(t *testing.T) {
 
 	cache.Set(Book{"b", 10})
 	cache.Set(Book{"c", 15})
+
+	if cache.Erase("e") != false {
+		t.Fatalf("want false, got true")
+	}
+
 	cache.Set(Book{"d", 15})
 	cache.Set(Book{"e", 15})
 
 	if cache.Get("a") != nil {
 		t.Fatalf("got a, want nil")
+	}
+
+	if cache.Erase("e") != true {
+		t.Fatalf("want true, got false")
+	}
+
+	if cache.Get("e") != nil {
+		t.Fatalf("got e, want nil")
 	}
 }

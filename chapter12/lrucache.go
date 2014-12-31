@@ -27,7 +27,7 @@ func NewLRUCache(capacity int) *LRUCache {
 	}
 }
 
-func (c LRUCache) Get(key string) Cacheable {
+func (c *LRUCache) Get(key string) Cacheable {
 	if item, found := c.items[key]; found {
 		c.list.MoveToFront(item.listElement)
 		return item.cacheable
@@ -36,7 +36,7 @@ func (c LRUCache) Get(key string) Cacheable {
 	}
 }
 
-func (c LRUCache) Set(cacheable Cacheable) {
+func (c *LRUCache) Set(cacheable Cacheable) {
 	if item, found := c.items[cacheable.Key()]; found {
 		item.cacheable = cacheable
 		c.list.MoveToFront(item.listElement)
@@ -49,4 +49,13 @@ func (c LRUCache) Set(cacheable Cacheable) {
 		item.listElement = c.list.PushFront(item)
 		c.items[cacheable.Key()] = item
 	}
+}
+
+func (c *LRUCache) Erase(key string) bool {
+	if _, found := c.items[key]; !found {
+		return false
+	}
+	c.list.Remove(c.items[key].listElement)
+	delete(c.items, key)
+	return true
 }
