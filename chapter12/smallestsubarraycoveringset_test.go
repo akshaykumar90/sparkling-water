@@ -46,7 +46,7 @@ func TestSmallestSubarrayCoveringSet(t *testing.T) {
 	for _, tt := range smallestSubarrayCoveringSetTests {
 		actual := SmallestSubarrayCoveringSet(strings.Split(tt.text, " "), tt.keywords)
 		if strings.Join(actual, " ") != tt.expected {
-			t.Errorf("SmallestSubarrayCoveringSet(%s, %v): expected %s, actual %s",
+			t.Errorf("SmallestSubarrayCoveringSet(%q, %q): expected %q, actual %q",
 				tt.text, tt.keywords, tt.expected, strings.Join(actual, " "))
 		}
 	}
