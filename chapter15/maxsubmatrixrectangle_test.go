@@ -32,6 +32,15 @@ func TestMaxSubmatrixRectangle(t *testing.T) {
 	}
 }
 
+func TestMaxSubmatrixRectangleImproved(t *testing.T) {
+	for i, tt := range maxSubmatrixRectangleTests {
+		actual := MaxSubmatrixRectangleImproved(tt.mat)
+		if actual != tt.expected {
+			t.Errorf("MaxSubmatrixRectangleImproved [%d]: expected %d, actual %d", i+1, tt.expected, actual)
+		}
+	}
+}
+
 var maxSubmatrixSquareTests = []struct {
 	mat      [][]bool
 	expected int

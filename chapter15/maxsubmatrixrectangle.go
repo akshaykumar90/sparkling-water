@@ -102,3 +102,31 @@ func MaxSubmatrixSquare(mat [][]bool) int {
 
 	return largest
 }
+
+func MaxSubmatrixRectangleImproved(mat [][]bool) int {
+	m, n := len(mat), len(mat[0])
+
+	maxHeightMat := make([][]int, m)
+	for i := range maxHeightMat {
+		maxHeightMat[i] = make([]int, n)
+	}
+
+	for i := m - 1; i >= 0; i-- {
+		for j := n - 1; j >= 0; j-- {
+			if mat[i][j] {
+				if i+1 < m {
+					maxHeightMat[i][j] = maxHeightMat[i+1][j] + 1
+				} else {
+					maxHeightMat[i][j] = 1
+				}
+			}
+		}
+	}
+
+	largest := 0
+	for _, row := range maxHeightMat {
+		largest = max(largest, LargestRectangleUnderSkyline(row))
+	}
+
+	return largest
+}
