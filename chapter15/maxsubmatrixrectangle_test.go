@@ -31,3 +31,41 @@ func TestMaxSubmatrixRectangle(t *testing.T) {
 		}
 	}
 }
+
+var maxSubmatrixSquareTests = []struct {
+	mat      [][]bool
+	expected int
+}{
+	{
+		[][]bool{
+			{true, true, false},
+			{true, true, true},
+		},
+		4,
+	},
+	{
+		[][]bool{
+			{true, true, false, false},
+			{true, true, true, true},
+			{true, true, true, true},
+		},
+		4,
+	},
+	{
+		[][]bool{
+			{true, true, false, false},
+			{true, false, true, true},
+			{true, true, true, false},
+		},
+		1,
+	},
+}
+
+func TestMaxSubmatrixSquare(t *testing.T) {
+	for i, tt := range maxSubmatrixSquareTests {
+		actual := MaxSubmatrixSquare(tt.mat)
+		if actual != tt.expected {
+			t.Errorf("MaxSubmatrixSquare [%d]: expected %d, actual %d", i+1, tt.expected, actual)
+		}
+	}
+}

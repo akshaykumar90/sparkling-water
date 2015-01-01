@@ -8,7 +8,23 @@ type MaxPair struct {
 	w, h int
 }
 
-func MaxSubmatrixRectangle(mat [][]bool) int {
+func min(a, b int) int {
+	if b < a {
+		return b
+	} else {
+		return a
+	}
+}
+
+func max(a, b int) int {
+	if b > a {
+		return b
+	} else {
+		return a
+	}
+}
+
+func preProcessMatrix(mat [][]bool) [][]MaxPair {
 	m, n := len(mat), len(mat[0])
 
 	maxPairMat := make([][]MaxPair, m)
@@ -34,6 +50,14 @@ func MaxSubmatrixRectangle(mat [][]bool) int {
 		}
 	}
 
+	return maxPairMat
+}
+
+func MaxSubmatrixRectangle(mat [][]bool) int {
+	m, n := len(mat), len(mat[0])
+
+	maxPairMat := preProcessMatrix(mat)
+
 	largest := 0
 
 	for i := 0; i < m; i++ {
@@ -41,14 +65,37 @@ func MaxSubmatrixRectangle(mat [][]bool) int {
 			if mat[i][j] && maxPairMat[i][j].w*maxPairMat[i][j].h > largest {
 				minw := math.MaxInt32
 				for k := 0; k < maxPairMat[i][j].h; k++ {
-					if maxPairMat[i+k][j].w < minw {
-						minw = maxPairMat[i+k][j].w
-					}
-					area := (k + 1) * minw
-					if area > largest {
-						largest = area
-					}
+					minw = min(minw, maxPairMat[i+k][j].w)
+					largest = max(largest, (k+1)*minw)
 				}
+			}
+		}
+	}
+
+	return largest
+}
+
+func MaxSubmatrixSquare(mat [][]bool) int {
+	m, n := len(mat), len(mat[0])
+
+	maxPairMat := preProcessMatrix(mat)
+
+	largest := 0
+
+	longestSide := make([][]int, m)
+	for i := range longestSide {
+		longestSide[i] = make([]int, n)
+	}
+
+	for i := m - 1; i >= 0; i-- {
+		for j := n - 1; j >= 0; j-- {
+			if mat[i][j] {
+				s := min(maxPairMat[i][j].h, maxPairMat[i][j].w)
+				if i+1 < m && j+1 < n {
+					s = min(longestSide[i+1][j+1]+1, s)
+				}
+				longestSide[i][j] = s
+				largest = max(largest, s*s)
 			}
 		}
 	}
