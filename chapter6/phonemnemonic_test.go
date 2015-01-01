@@ -13,8 +13,6 @@ func TestPhoneMnemonic(t *testing.T) {
 	}
 
 	for _, tt := range phoneMnemonicTests {
-		fmt.Println(tt)
-		PhoneMnemonic(tt)
-		fmt.Println()
+		fmt.Printf("PhoneMnemonic(%v) -> %v\n", tt, PhoneMnemonic(tt))
 	}
 }
