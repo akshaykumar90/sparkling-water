@@ -1,7 +1,7 @@
 package chapter10
 
 import (
-	"fmt"
+	"github.com/akshaykumar90/sparkling-water/common"
 	"testing"
 )
 
@@ -12,8 +12,9 @@ func TestMergeSortedArrays(t *testing.T) {
 		{44, 99},
 	}
 
-	result := MergeSortedArrays(arrs)
-	fmt.Println(result)
-	fmt.Println()
+	expected := []int{12, 24, 44, 45, 49, 59, 87, 99}
 
+	actual := MergeSortedArrays(arrs)
+
+	common.AssertIntsAreEqual(t, "MergeSortedArrays", expected, actual)
 }

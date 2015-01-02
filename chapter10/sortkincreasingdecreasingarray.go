@@ -1,19 +1,14 @@
-// problem 10.2
+// Problem 10.2
 
 package chapter10
+
+import "github.com/akshaykumar90/sparkling-water/common"
 
 func sgn(a, b int) int {
 	if a < b {
 		return 1
 	} else {
 		return -1
-	}
-}
-
-func reverse(arr []int) {
-	n := len(arr)
-	for i := 0; i < n/2; i++ {
-		arr[i], arr[n-1-i] = arr[n-1-i], arr[i]
 	}
 }
 
@@ -24,7 +19,7 @@ func SortKIncreasingDecreasingArray(arr []int) []int {
 	for i := 1; i < len(arr); i++ {
 		if sgn(arr[i-1], arr[i]) != currSgn {
 			if currSgn == -1 {
-				reverse(arr[begin:i])
+				common.ReverseInts(arr[begin:i])
 			}
 			arrs = append(arrs, arr[begin:i])
 			begin = i
@@ -32,7 +27,7 @@ func SortKIncreasingDecreasingArray(arr []int) []int {
 		}
 	}
 	if currSgn == -1 {
-		reverse(arr[begin:])
+		common.ReverseInts(arr[begin:])
 	}
 	arrs = append(arrs, arr[begin:])
 	return MergeSortedArrays(arrs)

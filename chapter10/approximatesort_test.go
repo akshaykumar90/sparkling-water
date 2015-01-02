@@ -6,7 +6,7 @@ import (
 )
 
 func TestApproximateSort(t *testing.T) {
-	in := []int{1,4,3,6,2,7,8,5,9,10}
+	in := []int{1, 4, 3, 6, 2, 7, 8, 5, 9, 10}
 
 	out := ApproximateSort(in, 3)
 
@@ -14,4 +14,3 @@ func TestApproximateSort(t *testing.T) {
 	fmt.Println()
 
 }
-
