@@ -13,7 +13,7 @@ func assertEqualLists(t *testing.T, name string, expected, actual *Element) {
 	}
 
 	if actual != nil || expected != nil {
-		t.Errorf("%s: premature termination, matching prefix length %d",name, l)
+		t.Errorf("%s: premature termination, matching prefix length %d", name, l)
 	}
 }
 

@@ -4,7 +4,7 @@ package chapter7
 
 type Element struct {
 	Value int
-	Next *Element
+	Next  *Element
 }
 
 func MergeSortedLists(fst *Element, snd *Element) *Element {

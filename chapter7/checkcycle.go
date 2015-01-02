@@ -3,7 +3,7 @@
 package chapter7
 
 func CheckCycle(head *Element) *Element {
-	i,j := head, head
+	i, j := head, head
 
 	for i != nil && j != nil {
 		i, j = i.Next, j.Next
@@ -13,7 +13,8 @@ func CheckCycle(head *Element) *Element {
 		}
 
 		if i == j {
-			for i = head; i != j; i,j = i.Next, j.Next {}
+			for i = head; i != j; i, j = i.Next, j.Next {
+			}
 			return i
 		}
 	}
