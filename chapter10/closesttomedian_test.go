@@ -1,7 +1,11 @@
 package chapter10
 
-import "testing"
-import "sort"
+import (
+	"fmt"
+	"github.com/akshaykumar90/sparkling-water/common"
+	"sort"
+	"testing"
+)
 
 var closestToMedianTests = []struct {
 	a        []int
@@ -23,17 +27,11 @@ var closestToMedianTests = []struct {
 func TestClosestToMedian(t *testing.T) {
 	for _, tt := range closestToMedianTests {
 		actual := ClosestToMedian(tt.a, tt.k)
-		if tt.k != len(actual) {
-			t.Fatalf("ClosestToMedian(%v, %d): expected length %d, actual length %d",
-				tt.a, tt.k, tt.k, len(actual))
-		} else {
-			sort.Ints(actual)
-			for i, v := range tt.expected {
-				if v != actual[i] {
-					t.Fatalf("ClosestToMedian(%v, %d): at %d: expected %d, actual %d",
-						tt.a, tt.k, i+1, v, actual[i])
-				}
-			}
-		}
+
+		sort.Ints(actual)
+
+		handle := fmt.Sprintf("ClosestToMedian(%v, %d)", tt.a, tt.k)
+
+		common.AssertIntsAreEqual(t, handle, tt.expected, actual)
 	}
 }

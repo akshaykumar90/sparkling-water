@@ -4,11 +4,11 @@ package chapter10
 
 import (
 	"container/heap"
-	"fmt"
+	"github.com/akshaykumar90/sparkling-water/common"
 )
 
-func OnlineMedianHelper(a []int) (IntHeap, IntHeap, []float64) {
-	minHeap, maxHeap := make(IntHeap, 0), make(IntHeap, 0)
+func OnlineMedianHelper(a []int) (common.IntHeap, common.IntHeap, []float64) {
+	minHeap, maxHeap := make(common.IntHeap, 0), make(common.IntHeap, 0)
 
 	medians := []float64{float64(a[0])}
 
@@ -40,7 +40,7 @@ func OnlineMedianHelper(a []int) (IntHeap, IntHeap, []float64) {
 	return maxHeap, minHeap, medians
 }
 
-func OnlineMedian(s []int) {
+func OnlineMedian(s []int) []float64 {
 	_, _, medians := OnlineMedianHelper(s)
-	fmt.Println(medians)
+	return medians
 }
