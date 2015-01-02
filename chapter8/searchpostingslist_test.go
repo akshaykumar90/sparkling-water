@@ -1,9 +1,6 @@
 package chapter8
 
-import (
-	"fmt"
-	"testing"
-)
+import "testing"
 
 func TestSearchPostingsListRecursive(t *testing.T) {
 	a := &PostingsListElement{Value: 1, Order: -1}
@@ -21,16 +18,19 @@ func TestSearchPostingsListRecursive(t *testing.T) {
 	c.Jump = b
 	d.Jump = d
 
-	fmt.Println("TestSearchPostingsListRecursive:")
+	expected := []int{0, 2, 1, 3}
+
 	SearchPostingsListRecursive(a)
 
 	curr := a
+	i := 0
 	for curr != nil {
-		fmt.Println(curr.Order)
+		if actual := curr.Order; actual != expected[i] {
+			t.Fatalf("SearchPostingsListRecursive: at %d: expected %d, actual %d", i, expected[i], actual)
+		}
 		curr = curr.Next
+		i++
 	}
-
-	fmt.Println()
 }
 
 func TestSearchPostingsListIterative(t *testing.T) {
@@ -49,14 +49,17 @@ func TestSearchPostingsListIterative(t *testing.T) {
 	c.Jump = b
 	d.Jump = d
 
-	fmt.Println("TestSearchPostingsListIterative:")
+	expected := []int{0, 2, 1, 3}
+
 	SearchPostingsListIterative(a)
 
 	curr := a
+	i := 0
 	for curr != nil {
-		fmt.Println(curr.Order)
+		if actual := curr.Order; actual != expected[i] {
+			t.Fatalf("SearchPostingsListIterative: at %d: expected %d, actual %d", i, expected[i], actual)
+		}
 		curr = curr.Next
+		i++
 	}
-
-	fmt.Println()
 }
