@@ -7,3 +7,19 @@ func ReverseInts(arr []int) {
 		arr[i], arr[n-1-i] = arr[n-1-i], arr[i]
 	}
 }
+
+func MinInt(a, b int) int {
+	if b < a {
+		return b
+	} else {
+		return a
+	}
+}
+
+func MaxInt(a, b int) int {
+	if b > a {
+		return b
+	} else {
+		return a
+	}
+}
