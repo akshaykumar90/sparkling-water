@@ -1,32 +1,43 @@
-// problem 16.3
+// Problem 16.3
 
 package chapter16
 
-func dfsHelper(adj [][]int) ([]bool, func(int) bool) {
-	color := make([]bool, len(adj))
+func WiringCircuitBoard(board [][]int) bool {
+	dist := make([]int, len(board))
 
-	state := make([]int, len(adj))
+	for i := range dist {
+		dist[i] = -1
+	}
 
-	var dfs func(int) bool
-	dfs = func(pin int) bool {
-		state[pin] = DISCOVERED
-		for _, v := range adj[pin] {
-			if state[v] == UNDISCOVERED {
-				color[v] = !color[pin]
-				if !dfs(v) {
+	bfs := func(v int) bool {
+		q := []int{v}
+
+		for len(q) > 0 {
+			curr := q[0]
+
+			for _, e := range board[curr] {
+				if dist[e] == -1 {
+					dist[e] = dist[curr] + 1
+					q = append(q, e)
+				} else if dist[e] == dist[curr] {
 					return false
 				}
-			} else if color[v] == color[pin] {
-				return false
 			}
+
+			q = q[1:]
 		}
+
 		return true
 	}
 
-	return color, dfs
-}
+	for v := range board {
+		if dist[v] == -1 {
+			dist[v] = 0
+			if bfs(v) == false {
+				return false
+			}
+		}
+	}
 
-func WiringCircuitBoard(board [][]int) bool {
-	_, dfsFn := dfsHelper(board)
-	return dfsFn(0)
+	return true
 }
