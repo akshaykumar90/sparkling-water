@@ -1,8 +1,6 @@
-// problem 16.1
+// Problem 16.1
 
 package chapter16
-
-import "fmt"
 
 const (
 	UNDISCOVERED = iota
@@ -23,40 +21,41 @@ type Point struct {
 	y, x int
 }
 
-func dfs(maze [][]int, state [][]int, start, end Point) bool {
-	state[start.y][start.x] = DISCOVERED
+func SearchMaze(maze [][]int, start, end Point) []Point {
+	path := make([]Point, 0)
 
-	if start.x == end.x && start.y == end.y {
-		fmt.Println(start.y, start.x)
-		return true
+	isFeasible := func(point Point) bool {
+		return point.y >= 0 && point.y < len(maze) &&
+			point.x >= 0 && point.x < len(maze[0]) &&
+			maze[point.y][point.x] == 1
 	}
 
-	for _, e := range edges {
-		next_y, next_x := start.y+e.dy, start.x+e.dx
-		if next_y >= 0 && next_y < len(maze) &&
-			next_x >= 0 && next_x < len(maze[0]) &&
-			maze[next_y][next_x] == 1 &&
-			state[next_y][next_x] == UNDISCOVERED {
-			if found := dfs(maze, state, Point{next_y, next_x}, end); found {
-				fmt.Println(start.y, start.x)
-				return true
+	var dfs func(Point) bool
+	dfs = func(point Point) bool {
+		if point == end {
+			return true
+		}
+
+		for _, e := range edges {
+			next := Point{point.y + e.dy, point.x + e.dx}
+			if isFeasible(next) {
+				maze[next.y][next.x] = 0
+				path = append(path, next)
+				if dfs(next) {
+					return true
+				}
+				path = path[:len(path)-1]
 			}
 		}
+
+		return false
 	}
 
-	state[start.y][start.x] = VISITED
-
-	return false
-}
-
-func SearchMaze(maze [][]int, start, end Point) {
-	state := make([][]int, len(maze))
-	for i := 0; i < len(maze); i++ {
-		state[i] = make([]int, len(maze[0]))
+	maze[start.y][start.x] = 0
+	path = append(path, start)
+	if !dfs(start) {
+		path = path[:len(path)-1]
 	}
 
-	if found := dfs(maze, state, start, end); !found {
-		fmt.Println("No path exists.")
-	}
-
+	return path
 }
