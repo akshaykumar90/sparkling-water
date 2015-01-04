@@ -1,35 +1,26 @@
-// problem 16.5
+// Problem 16.5
 
 package chapter16
 
-func contactsSearchHelper(graph [][]int) (*[]int, func(int)) {
-	contacts := make([]int, 0)
+func ExtendedContacts(graph [][]int) [][]int {
+	extendedContacts := make([][]int, 0)
 
-	contactsPtr := &contacts
-
-	state := make([]int, len(graph))
-
-	var dfs func(int)
-	dfs = func(v int) {
-		state[v] = DISCOVERED
+	var dfs func([]bool, int, *[]int)
+	dfs = func(state []bool, v int, contacts *[]int) {
+		state[v] = true
 		for _, e := range graph[v] {
-			if state[e] == UNDISCOVERED {
-				*contactsPtr = append(*contactsPtr, e)
-				dfs(e)
+			if state[e] == false {
+				*contacts = append(*contacts, e)
+				dfs(state, e, contacts)
 			}
 		}
 	}
 
-	return contactsPtr, dfs
-}
-
-func ExtendedContacts(graph [][]int) [][]int {
-	extendedContacts := make([][]int, len(graph))
-
 	for i := range graph {
-		contactsPtr, dfsFn := contactsSearchHelper(graph)
-		dfsFn(i)
-		extendedContacts[i] = *contactsPtr
+		state := make([]bool, len(graph))
+		contacts := make([]int, 0)
+		dfs(state, i, &contacts)
+		extendedContacts = append(extendedContacts, contacts)
 	}
 
 	return extendedContacts
