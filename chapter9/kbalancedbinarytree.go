@@ -1,6 +1,8 @@
-// problem 9.2
+// Problem 9.2
 
 package chapter9
+
+import "github.com/akshaykumar90/sparkling-water/common"
 
 type TreeElement struct {
 	Value int
@@ -22,11 +24,7 @@ func visitTreeElement(elem *TreeElement, k int) (int, *TreeElement) {
 			return 0, rd
 		}
 
-		diff := ln - rn
-		if diff < 0 {
-			diff = -diff
-		}
-		if diff > k {
+		if diff := common.Abs(ln - rn); diff > k {
 			return 0, elem
 		} else {
 			return ln + rn + 1, nil
