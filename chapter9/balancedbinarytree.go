@@ -2,45 +2,31 @@
 
 package chapter9
 
-func balancedBinaryTreeHelper(elem *TreeElement) (int, bool) {
+import "github.com/akshaykumar90/sparkling-water/common"
+
+func balancedBinaryTreeHelper(elem *TreeElement) int {
 	if elem == nil {
-		return -1, true
+		return -1
 	}
 
-	leftHeight, leftBalanced := balancedBinaryTreeHelper(elem.Left)
-	if !leftBalanced {
-		return -2, false
+	leftHeight := balancedBinaryTreeHelper(elem.Left)
+	if leftHeight == -2 {
+		return -2
 	}
 
-	rightHeight, rightBalanced := balancedBinaryTreeHelper(elem.Right)
-	if !rightBalanced {
-		return -2, false
+	rightHeight := balancedBinaryTreeHelper(elem.Right)
+	if rightHeight == -2 {
+		return -2
 	}
 
-	abs := func(x int) int {
-		if x < 0 {
-			return -x
-		} else {
-			return x
-		}
+	if common.Abs(leftHeight-rightHeight) > 1 {
+		return -2
 	}
 
-	if abs(leftHeight-rightHeight) > 1 {
-		return -2, false
-	}
-
-	max := func(x, y int) int {
-		if x < y {
-			return y
-		} else {
-			return x
-		}
-	}
-
-	return 1 + max(leftHeight, rightHeight), true
+	return 1 + common.MaxInt(leftHeight, rightHeight)
 }
 
 func BalancedBinaryTree(root *TreeElement) bool {
-	_, balanced := balancedBinaryTreeHelper(root)
-	return balanced
+	height := balancedBinaryTreeHelper(root)
+	return height != -2
 }
