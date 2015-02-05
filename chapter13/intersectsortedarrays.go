@@ -1,4 +1,4 @@
-// problem 13.5
+// Problem 13.5
 
 package chapter13
 
@@ -8,7 +8,7 @@ func IntersectSortedArrays(a, b []int) []int {
 	i, j := 0, 0
 
 	for i < len(a) && j < len(b) {
-		if a[i] == b[j] {
+		if a[i] == b[j] && (i == 0 || a[i] != a[i-1]) {
 			c = append(c, a[i])
 			i++
 			j++

@@ -2,16 +2,19 @@ package chapter13
 
 import (
 	"fmt"
+	"github.com/akshaykumar90/sparkling-water/common"
 	"testing"
 )
 
 func TestIntersectSortedArrays(t *testing.T) {
-	a := []int{1, 3, 4, 6, 8, 10}
-	b := []int{3, 4, 5, 9, 10}
+	a := []int{1, 3, 4, 6, 8, 10, 10}
+	b := []int{3, 4, 5, 9, 10, 10}
 
-	c := IntersectSortedArrays(a, b)
+	expected := []int{3, 4, 10}
 
-	fmt.Printf("IntersectSortedArrays (%v , %v) = %v\n", a, b, c)
-	fmt.Println()
+	actual := IntersectSortedArrays(a, b)
 
+	handle := fmt.Sprintf("IntersectSortedArrays(%v, %v) -> %v", a, b, actual)
+
+	common.AssertIntsAreEqual(t, handle, expected, actual)
 }
